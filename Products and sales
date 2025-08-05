@@ -1,0 +1,170 @@
+mysql> create database kv;
+ERROR 1007 (HY000): Can't create database 'kv'; database exists
+mysql> use kv;
+Database changed
+mysql> CREATE TABLE Products (
+    -> product_id INT PRIMARY KEY,
+    -> product_name VARCHAR(100),
+    -> category VARCHAR(50),
+    -> unit_price DECIMAL(10, 2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from products
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    ->
+    -> ;
+Empty set (0.01 sec)
+
+mysql> INSERT INTO Products (product_id, product_name, category, unit_price) VALUES
+    -> (101, &#39;Laptop&#39;, &#39;Electronics&#39;, 500.00),
+    -> (102, &#39;Smartphone&#39;, &#39;Electronics&#39;, 300.00),
+    -> (103, &#39;Headphones&#39;, &#39;Electronics&#39;, 30.00),
+    -> (104, &#39;Keyboard&#39;, &#39;Electronics&#39;, 20.00),
+    -> (102, &#39;Smartphone&#39;, &#39;Electronics&#39;, 300.00),;
+    -> ;
+
+mysql> INSERT INTO Products (product_id, product_name, category, unit_price) VALUES
+    -> (101,'Laptop','Electronics', 500.00),
+    -> (102,'Smartphone','Electronics', 300.00),
+    -> (103,'Headphones','Electronics', 30.00),
+    -> (104,'Keyboard','Electronics',20.00);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from products;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
++------------+--------------+-------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select product_name from products ;
++--------------+
+| product_name |
++--------------+
+| Laptop       |
+| Smartphone   |
+| Headphones   |
+| Keyboard     |
++--------------+
+4 rows in set (0.00 sec)
+
+mysql> select product_name and unit_price from products;
++-----------------------------+
+| product_name and unit_price |
++-----------------------------+
+|                           0 |
+|                           0 |
+|                           0 |
+|                           0 |
++-----------------------------+
+4 rows in set, 4 warnings (0.01 sec)
+
+mysql> select product_name, unit_price from products;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
++--------------+------------+
+4 rows in set (0.00 sec)
+mysql> select * from products where category = 'Electronics';
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
++------------+--------------+-------------+------------+
+4 rows in set (0.01 sec)
+
+mysql> select product_id,product_name from products where unit_price > 100;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|        101 | Laptop       |
+|        102 | Smartphone   |
++------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT AVG(unit_price) AS average_price
+    -> FROM products ;
++---------------+
+| average_price |
++---------------+
+|    212.500000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> vSELECT product_name, unit_price
+    -> FROM products
+    -> WHERE unit_price = (SELECT MAX(unit_price) FROM products);
+WHERE unit_price = (SELECT MAX(un' at line 1
+mysql> select product_id,unit_price from products where unit_price = (select max(unit_price) from products);
++------------+------------+
+| product_id | unit_price |
++------------+------------+
+|        101 |     500.00 |
++------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT product_name, unit_price
+    -> FROM Products
+    -> ORDER BY unit_price DESC;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
++--------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT product_name, unit_price
+    -> FROM Products
+    -> WHERE unit_price BETWEEN 20 AND 600;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
++--------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT product_name, category
+    -> FROM Products
+    -> ORDER BY category ASC;
++--------------+-------------+
+| product_name | category    |
++--------------+-------------+
+| Laptop       | Electronics |
+| Smartphone   | Electronics |
+| Headphones   | Electronics |
+| Keyboard     | Electronics |
++--------------+-------------+
+4 rows in set (0.00 sec)
