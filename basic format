@@ -1,0 +1,440 @@
+mysql> INSERT INTO reaction (user_name, reaction_type, post_id, created_at, location, mood_level, comment) VALUES
+    -> ('Alice', 'like', 101, '2025-08-07 10:15:00', 'New York', 8, 'Nice post!'),
+    -> ('Bob', 'love', 102, '2025-08-06 14:20:00', 'Los Angeles', 9, 'Awesome!'),
+    -> ('Charlie', 'angry', 101, '2025-08-05 09:10:00', 'Chicago', 3, NULL),
+    -> ('Diana', 'wow', 103, '2025-08-07 08:30:00', 'Miami', 7, 'Interesting point.'),
+    -> ('Ethan', 'sad', 104, '2025-08-04 16:45:00', 'Dallas', 2, NULL),
+    -> ('Fiona', 'love', 102, '2025-08-07 12:00:00', 'Boston', 6, 'Well said.'),
+    -> ('George', 'like', 105, '2025-08-03 11:25:00', 'Seattle', 5, NULL),
+    -> ('Hannah', 'like', 106, '2025-08-07 15:50:00', 'Denver', 9, 'Completely agree!'),
+    -> ('Ian', 'angry', 107, '2025-08-06 13:15:00', 'Phoenix', 4, 'Not okay with this.'),
+    -> ('Jane', 'sad', 108, '2025-08-02 18:40:00', 'Atlanta', 1, NULL),
+    -> ('Sam', 'like', 101, '2025-08-07 10:50:00', 'New York', 8, '👍'),
+    -> ('Anita', 'wow', 109, '2025-08-01 20:10:00', 'Houston', 7, NULL),
+    -> ('Brian', 'love', 110, '2025-08-07 09:05:00', 'San Francisco', 10, 'Fantastic work!'),
+    -> ('Catherine', 'like', 111, '2025-08-07 08:55:00', 'New York', 6, NULL),
+    -> ('Daniel', 'angry', 112, '2025-08-05 17:35:00', 'Chicago', 2, NULL);
+Query OK, 15 rows affected (0.01 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from user_name like 'a%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like 'a%'' at line 1
+mysql> select * from reaction;
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  5 | Ethan     | sad           |     104 | 2025-08-04 16:45:00 | Dallas        |          2 | NULL                |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 10 | Jane      | sad           |     108 | 2025-08-02 18:40:00 | Atlanta       |          1 | NULL                |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                   |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL                |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+15 rows in set (0.00 sec)
+
+mysql>  select * from user_name like 'a%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like 'a%'' at line 1
+mysql> select user_name * from reraction like 'a%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from reraction like 'a%'' at line 1
+mysql>  select * 'from user_name' like 'a%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''from user_name' like 'a%'' at line 1
+mysql> ^C
+mysql> SELECT * FROM reaction WHERE user_name LIKE 'A%';
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment    |
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post! |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston  |          7 | NULL       |
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from reaction where user_name like 'a%';
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment    |
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post! |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston  |          7 | NULL       |
++----+-----------+---------------+---------+---------------------+----------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT user_name AS Reactor, reaction_type AS Type
+    -> FROM reaction;
++-----------+-------+
+| Reactor   | Type  |
++-----------+-------+
+| Alice     | like  |
+| Bob       | love  |
+| Charlie   | angry |
+| Diana     | wow   |
+| Ethan     | sad   |
+| Fiona     | love  |
+| George    | like  |
+| Hannah    | like  |
+| Ian       | angry |
+| Jane      | sad   |
+| Sam       | like  |
+| Anita     | wow   |
+| Brian     | love  |
+| Catherine | like  |
+| Daniel    | angry |
++-----------+-------+
+15 rows in set (0.00 sec)
+
+mysql>
+mysql> -- BETWEEN: Find all reactions where the mood level is between 4 and 8
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE mood_level BETWEEN 4 AND 8;
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post!          |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami    |          7 | Interesting point.  |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston   |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle  |          5 | NULL                |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix  |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York |          8 | ?                   |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston  |          7 | NULL                |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York |          6 | NULL                |
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> -- AND: Get all reactions where the type is 'like' AND the mood level is above 7
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE reaction_type = 'like' AND mood_level > 7;
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment           |
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post!        |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver   |          9 | Completely agree! |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York |          8 | ?                 |
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> -- OR: List all reactions where the type is 'love' OR 'angry'
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE reaction_type = 'love' OR reaction_type = 'angry';
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> -- NOT: Show all reactions that are NOT of type 'sad'
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE NOT reaction_type = 'sad';
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                   |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL                |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+13 rows in set (0.00 sec)
+
+mysql>
+mysql> -- IN: Find all reactions where the reaction type is 'like', 'wow', or 'love'
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE reaction_type IN ('like', 'wow', 'love');
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment            |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!         |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!           |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point. |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.         |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL               |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!  |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                  |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL               |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!    |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL               |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql>
+mysql> -- IS NULL: Display all reactions where the comment is missing (i.e., NULL)
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE comment IS NULL;
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment |
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago  |          3 | NULL    |
+|  5 | Ethan     | sad           |     104 | 2025-08-04 16:45:00 | Dallas   |          2 | NULL    |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle  |          5 | NULL    |
+| 10 | Jane      | sad           |     108 | 2025-08-02 18:40:00 | Atlanta  |          1 | NULL    |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston  |          7 | NULL    |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York |          6 | NULL    |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago  |          2 | NULL    |
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+7 rows in set (0.00 sec)
+
+mysql>
+mysql> -- IS NOT NULL: Find all reactions that include a comment
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE comment IS NOT NULL;
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                   |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> -- UPPER(): Show all usernames in uppercase
+mysql> SELECT UPPER(user_name)
+    -> FROM reaction;
++------------------+
+| UPPER(user_name) |
++------------------+
+| ALICE            |
+| BOB              |
+| CHARLIE          |
+| DIANA            |
+| ETHAN            |
+| FIONA            |
+| GEORGE           |
+| HANNAH           |
+| IAN              |
+| JANE             |
+| SAM              |
+| ANITA            |
+| BRIAN            |
+| CATHERINE        |
+| DANIEL           |
++------------------+
+15 rows in set (0.01 sec)
+
+mysql>
+mysql> -- LOWER(): Show all reaction types in lowercase
+mysql> SELECT LOWER(reaction_type)
+    -> FROM reaction;
++----------------------+
+| LOWER(reaction_type) |
++----------------------+
+| like                 |
+| love                 |
+| angry                |
+| wow                  |
+| sad                  |
+| love                 |
+| like                 |
+| like                 |
+| angry                |
+| sad                  |
+| like                 |
+| wow                  |
+| love                 |
+| like                 |
+| angry                |
++----------------------+
+15 rows in set (0.00 sec)
+
+mysql>
+mysql> -- LENGTH(): Find all users whose usernames are longer than 6 characters
+mysql> SELECT user_name
+    -> FROM reaction
+    -> WHERE LENGTH(user_name) > 6;
++-----------+
+| user_name |
++-----------+
+| Charlie   |
+| Catherine |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> -- NOW(): Find all reactions made today (based on the created_at column)
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE DATE(created_at) = DATE(NOW());
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment            |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!         |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point. |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.         |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!  |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                  |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!    |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL               |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+7 rows in set (0.00 sec)
+
+mysql>
+mysql> -- DATE(): Extract and show only the date part from the created_at column
+mysql> SELECT DATE(created_at)
+    -> FROM reaction;
++------------------+
+| DATE(created_at) |
++------------------+
+| 2025-08-07       |
+| 2025-08-06       |
+| 2025-08-05       |
+| 2025-08-07       |
+| 2025-08-04       |
+| 2025-08-07       |
+| 2025-08-03       |
+| 2025-08-07       |
+| 2025-08-06       |
+| 2025-08-02       |
+| 2025-08-07       |
+| 2025-08-01       |
+| 2025-08-07       |
+| 2025-08-07       |
+| 2025-08-05       |
++------------------+
+15 rows in set (0.00 sec)
+
+mysql>
+mysql> -- LIKE with %: Find all users whose name contains the substring 'an'
+mysql> SELECT user_name
+    -> FROM reaction
+    -> WHERE user_name LIKE '%an%';
++-----------+
+| user_name |
++-----------+
+| Diana     |
+| Ethan     |
+| Hannah    |
+| Ian       |
+| Jane      |
+| Anita     |
+| Brian     |
+| Daniel    |
++-----------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> -- ROUND(): Display each user's mood level rounded to the nearest 5
+mysql> SELECT user_name, ROUND(mood_level / 5) * 5 AS rounded_mood_level
+    -> FROM reaction;
++-----------+--------------------+
+| user_name | rounded_mood_level |
++-----------+--------------------+
+| Alice     |                 10 |
+| Bob       |                 10 |
+| Charlie   |                  5 |
+| Diana     |                  5 |
+| Ethan     |                  0 |
+| Fiona     |                  5 |
+| George    |                  5 |
+| Hannah    |                 10 |
+| Ian       |                  5 |
+| Jane      |                  0 |
+| Sam       |                 10 |
+| Anita     |                  5 |
+| Brian     |                 10 |
+| Catherine |                  5 |
+| Daniel    |                  0 |
++-----------+--------------------+
+15 rows in set (0.01 sec)
+
+mysql>
+mysql> -- SUBSTR + UPPER(): Show the first 2 letters of each user's name in uppercase
+mysql> SELECT UPPER(SUBSTR(user_name, 1, 2))
+    -> FROM reaction;
++--------------------------------+
+| UPPER(SUBSTR(user_name, 1, 2)) |
++--------------------------------+
+| AL                             |
+| BO                             |
+| CH                             |
+| DI                             |
+| ET                             |
+| FI                             |
+| GE                             |
+| HA                             |
+| IA                             |
+| JA                             |
+| SA                             |
+| AN                             |
+| BR                             |
+| CA                             |
+| DA                             |
++--------------------------------+
+15 rows in set (0.00 sec)
+
+mysql>
+mysql> -- NOT IN (with values): Find all reactions not made on posts with IDs 10, 20, or 30
+mysql> SELECT *
+    -> FROM reaction
+    -> WHERE post_id NOT IN (10, 20, 30);
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  5 | Ethan     | sad           |     104 | 2025-08-04 16:45:00 | Dallas        |          2 | NULL                |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 10 | Jane      | sad           |     108 | 2025-08-02 18:40:00 | Atlanta       |          1 | NULL                |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ?                   |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL                |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+15 rows in set (0.00 sec)
+
+mysql>
+mysql> -- COUNT and IS NULL: Count how many reactions have no comment
+mysql> SELECT COUNT(*)
+    -> FROM reaction
+    -> WHERE comment IS NULL;
++----------+
+| COUNT(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> WHERE comment IS NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE comment IS NULL' at line 1
+mysql>
+mysql>
